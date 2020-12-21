@@ -53,3 +53,42 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        if(nums.size() < 4) return {};
+        sort(nums.begin(), nums.end());
+        set<vector<int>> temp;
+        vector<vector<int>> res;
+        int _size = nums.size();
+        for(int i = 0; i < _size - 3; i++)
+        {
+            if(nums[i] > target && target > 0) break;
+            for(int j = i + 1; j < _size - 2; j++)
+            {
+                int l = j + 1;
+                int m = _size - 1;
+                while(l < m)
+                {
+                    if(nums[i] + nums[j] + nums[l] + nums[m] < target)
+                        l++;
+                    else if(nums[i] + nums[j] + nums[l] + nums[m] > target)
+                        m--;
+                    else{
+                        vector<int> temp1{nums[i], nums[j], nums[l], nums[m]};
+                        temp.insert(temp1);
+                        l++;
+                        m--;
+                    }
+                }
+            }
+        }
+        for(auto a : temp)
+        {
+            res.push_back(a);
+        }
+        return res;
+    }
+};
